@@ -17,6 +17,7 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.Profile;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.data.r2dbc.core.R2dbcEntityTemplate;
+import org.springframework.data.r2dbc.dialect.MySqlDialect;
 import org.springframework.r2dbc.core.DatabaseClient;
 
 import io.r2dbc.pool.ConnectionPool;
@@ -69,8 +70,8 @@ public class R2dbcMasterSlaveConfiguration {
 
     @Primary
     @Bean
-    public R2dbcEntityTemplate r2dbcEntityTemplate(ConnectionFactory masterConnectionFactory) {
-        return new R2dbcEntityTemplate(masterConnectionFactory);
+    public R2dbcEntityTemplate r2dbcEntityTemplate(DatabaseClient masterDatabaseClient) {
+        return new R2dbcEntityTemplate(masterDatabaseClient, MySqlDialect.INSTANCE);
     }
 
     @Bean
