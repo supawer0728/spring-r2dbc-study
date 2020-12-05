@@ -1,0 +1,46 @@
+---
+spring:
+  r2dbc:
+    password: root
+    username: root
+    url: r2dbc:mysql://localhost:3306/test
+    pool:
+      enabled: true
+      initial-size: 5
+      max-size: 10
+      max-acquire-time: 1s
+      max-create-connection-time: 1s
+      max-idle-time: 1m
+
+logging:
+  level:
+    org.springframework.data.r2dbc: debug
+    org.springframework.r2dbc: debug
+---
+spring:
+  config:
+    activate:
+      on-profile: database-ms
+r2dbc:
+  master:
+    password: root
+    username: root
+    url: r2dbc:mysql://localhost:3306/test
+    pool:
+      enabled: true
+      initial-size: 5
+      max-size: 10
+      max-acquire-time: 1s
+      max-create-connection-time: 1s
+      max-idle-time: 1m
+  read-only:
+    password: readonly
+    username: readonly
+    url: r2dbc:mysql://localhost:3306/test
+    pool:
+      enabled: true
+      initial-size: 5
+      max-size: 10
+      max-acquire-time: 1s
+      max-create-connection-time: 1s
+      max-idle-time: 1m
